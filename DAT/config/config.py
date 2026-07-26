@@ -32,6 +32,7 @@ PORTRAIT = {
 
 REACTION = {
 
+    # TODO: these vals should be declaritive answering "what" not "how"
     "luminosity": f"op.REACTION.op('OUT_luminosity')['energy'].eval()"
 
 }

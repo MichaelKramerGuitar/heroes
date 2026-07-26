@@ -98,3 +98,20 @@ Examples:
 - What response curve is preferred?
 
 Configuration should remain external to the TouchDesigner binary whenever possible.
+
+# Architectural Milestone
+
+```bash
+            CONFIG
+               │
+        bootstrap/init
+               │
+      runtime configuration
+               │
+     ┌─────────┼─────────┐
+     │         │         │
+  AUDIO   PORTRAIT   REACTION
+     │         │         │
+     └─────────┼─────────┘
+            RENDER
+```

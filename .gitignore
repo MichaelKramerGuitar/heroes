@@ -1,5 +1,18 @@
-**/**.toe
+# TouchDesigner automatic backups
+Backup/
+Heroes.*.toe
 
-Backup
+# macOS
+.DS_Store
 
-assets
+# Python
+__pycache__/
+*.pyc
+
+# IDE
+.vscode/
+.idea/
+
+# Temporary files
+*.tmp
+*.bak

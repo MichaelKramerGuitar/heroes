@@ -13,10 +13,19 @@ AUDIO = {
 
 }
 
+PORTRAITS = {
+
+    "monk": "assets/monk.jpg",
+
+    "coltrane": "assets/coltrane.jpg",
+
+    "mingus": "assets/mingus.jpg"
+
+}
 
 PORTRAIT = {
 
-    "hero": "monk.jpg"
+    "hero": PORTRAITS.get("monk")
 
 }
 

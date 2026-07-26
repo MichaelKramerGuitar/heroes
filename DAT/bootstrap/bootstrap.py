@@ -6,19 +6,23 @@ me - this DAT
 Make sure the corresponding toggle is enabled in the Execute DAT.
 """
 
+def loadConfig():
+
+    namespace = {}
+
+    exec(op('/project1/CONFIG').text, namespace)
+
+    return {
+        k: v
+        for k, v in namespace.items()
+        if not k.startswith("__")
+    }
+
 def onStart():
 
-    CONFIG = {}
-
-    exec(
-        op('/project1/CONFIG').text,
-        CONFIG
-    )
-
-    root.store("CONFIG", CONFIG)
-
-    print("CONFIG loaded")
-
+    root.store("CONFIG", loadConfig())
+	
+    print("Config Loaded")
     return
 
 def onCreate():

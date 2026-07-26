@@ -1,0 +1,62 @@
+composition:
+
+    title:
+
+        First Breath
+
+portal:
+
+    guitar
+
+    portrait
+
+semantic_features:
+
+    energy:
+      source: AUDIO
+
+    luminosity:
+      source: REACTION
+
+idioms:
+
+    breathing
+
+traversals:
+
+    energy
+
+        →
+
+    luminosity
+
+intention:
+
+    Reveal the portrait through sound.
+
+components:
+
+  AUDIO:
+    exports:
+        energy:
+          type: CHOP
+          channels:
+            - energy 
+  
+  PORTRAIT:
+    exports:
+      portrait:
+        type: TOP
+
+  REACTION:
+    imports:
+      energy:
+        from: AUDIO.energy
+    
+    exports:
+      luminosity:
+        type: CHOP
+  
+  RENDER:
+    imports:
+      from: REACTION.luminosity

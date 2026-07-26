@@ -1,0 +1,1 @@
+# This artwork's philosophy

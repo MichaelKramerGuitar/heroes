@@ -568,3 +568,21 @@ Just a little table inside the STATE component that always tells us, in real tim
 Because once you've built that, every future iteration gains a "window into its own mind."
 
 And I have a feeling that's going to become one of the defining characteristics of *Heroes*: not just that it reacts beautifully, but that it is always able to *explain*, in its own vocabulary, why it is reacting the way it is. That kind of observability aligns perfectly with the design instinct you've demonstrated throughout this project.
+
+
+# Added Logger
+
+Purpose: **Table of Contents Principle**
+
+# Added StateExt
+
+```text
+python >>> op.STATE.Set("energy", "0.5", source="<COMPONENT>")
+StateExt.Set(): energy: 0.5 - source component: <COMPONENT>
+StateExt.Set(): calling RefreshDashboard()
+StateExt.RefreshDashboard(): clearing table...
+StateExt.RefreshDashboard(): adding energy: 0.5 for source component <COMPONENT>
+python >>> op.STATE.Remove("energy")
+StateExt.Remove(): attempting to remove key 'energy'
+StateExt.RefreshDashboard(): clearing table...
+```

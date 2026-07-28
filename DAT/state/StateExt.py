@@ -27,7 +27,7 @@ class StateExt:
         self.ownerComp = ownerComp
         self._state = {}
 
-    def Set(self, key: str, value: str, source=None) -> None:
+    def Publish(self, key: str, value: str, source=None) -> None:
         """
         key: state name
         value: state value
@@ -37,9 +37,9 @@ class StateExt:
             "value": value,
             "source": source
         }
-        print(f"StateExt.Set(): {key}: {value} - source component: {source}")
+        # print(f"StateExt.Set(): {key}: {value} - source component: {source}")
         op.LOG.Log(f"StateExt.Set(): {key}: {value} - source component: {source}")
-        print("StateExt.Set(): calling RefreshDashboard()")
+        # print("StateExt.Set(): calling RefreshDashboard()")
         op.LOG.Log("StateExt.Set(): calling RefreshDashboard()")
         self.RefreshDashboard()
 
@@ -47,7 +47,7 @@ class StateExt:
         return self._state.get(key, default)
 
     def Remove(self, key):
-        print(f"StateExt.Remove(): attempting to remove key '{key}'")
+        # print(f"StateExt.Remove(): attempting to remove key '{key}'")
         op.LOG.Log(f"StateExt.Remove(): attempting to remove key '{key}'")
         self._state.pop(key, None)
         self.RefreshDashboard()
@@ -58,13 +58,13 @@ class StateExt:
 
         table.clear()
 
-        print("StateExt.RefreshDashboard(): clearing table...")
+        # print("StateExt.RefreshDashboard(): clearing table...")
         op.LOG.Log("StateExt.RefreshDashboard(): clearing table...")
         table.appendRow(["Feature", "Value", "Source"])
 
         for key, entry in self._state.items():
-            print(f"StateExt.RefreshDashboard(): adding {key}: {entry['value']} " 
-                  f"for source component {entry['source']}")
+            # print(f"StateExt.RefreshDashboard(): adding {key}: {entry['value']} " 
+                  # f"for source component {entry['source']}")
             op.LOG.Log(f"StateExt.RefreshDashboard(): adding {key}: {entry['value']} " 
                        f"for source component {entry['source']}")
             table.appendRow([

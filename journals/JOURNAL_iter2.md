@@ -271,7 +271,7 @@ class StateExt:
 
         self._state = {}
 
-    def Set(self, key, value):
+    def Publish(self, key, value):
         self._state[key] = value
 
     def Get(self, key, default=None):
@@ -301,19 +301,19 @@ For example...
 REACTION might say
 
 ```python
-op.STATE.Set("energy", 0.82)
+op.STATE.Publish("energy", 0.82)
 ```
 
 Later
 
 ```python
-op.STATE.Set("presence", 0.44)
+op.STATE.Publish("presence", 0.44)
 ```
 
 Later
 
 ```python
-op.STATE.Set("dust_density", 0.13)
+op.STATE.Publish("dust_density", 0.13)
 ```
 
 STATE doesn't care.
@@ -501,7 +501,7 @@ OUT_memory
 Then StateExt simply says
 
 ```python
-self.Set(
+self.Publish(
     "memory",
     op("OUT_memory")["memory"].eval()
 )
@@ -577,12 +577,76 @@ Purpose: **Table of Contents Principle**
 # Added StateExt
 
 ```text
-python >>> op.STATE.Set("energy", "0.5", source="<COMPONENT>")
-StateExt.Set(): energy: 0.5 - source component: <COMPONENT>
-StateExt.Set(): calling RefreshDashboard()
+python >>> op.STATE.Publish("energy", "0.5", source="<COMPONENT>")
+StateExt.Publish(): energy: 0.5 - source component: <COMPONENT>
+StateExt.Publish(): calling RefreshDashboard()
 StateExt.RefreshDashboard(): clearing table...
 StateExt.RefreshDashboard(): adding energy: 0.5 for source component <COMPONENT>
 python >>> op.STATE.Remove("energy")
 StateExt.Remove(): attempting to remove key 'energy'
 StateExt.RefreshDashboard(): clearing table...
 ```
+
+# Memory Modeling
+
+> Memory is yesterday's presence.
+
+```text
+energy(t)
+
+↓
+
+memory(t)
+```
+
+*Where:*
+
+```text
+memory(t) = memory(t-1) * decay + energy(t)
+```
+
+Like exponentially decaying accumulator in `DSP`. 
+
+**Note:**
+
+> Python owns meaning. TouchDesigner Owns Signal Processing
+
+## STATE Base Comp Architecture
+
+```text
+STATE
+
+   IN_luminosity (Select CHOP)
+
+    ↓
+
+    Lag
+
+    ↓
+
+    Math
+
+    ↓
+
+    Rename
+
+    ↓
+
+    OUT_memory (Null CHOP)
+
+    state_table
+
+    memory_changed (Execute DAT)
+
+    StateExt.py
+```
+
+## Iteration 2
+
+Memory is not an effect.
+
+Memory is a semantic feature.
+
+The artwork no longer responds only to the present.
+
+It now carries experience forward through time.

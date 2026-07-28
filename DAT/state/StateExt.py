@@ -38,7 +38,9 @@ class StateExt:
             "source": source
         }
         print(f"StateExt.Set(): {key}: {value} - source component: {source}")
+        op.LOG.Log(f"StateExt.Set(): {key}: {value} - source component: {source}")
         print("StateExt.Set(): calling RefreshDashboard()")
+        op.LOG.Log("StateExt.Set(): calling RefreshDashboard()")
         self.RefreshDashboard()
 
     def Get(self, key, default=None):
@@ -46,6 +48,7 @@ class StateExt:
 
     def Remove(self, key):
         print(f"StateExt.Remove(): attempting to remove key '{key}'")
+        op.LOG.Log(f"StateExt.Remove(): attempting to remove key '{key}'")
         self._state.pop(key, None)
         self.RefreshDashboard()
 
@@ -56,11 +59,14 @@ class StateExt:
         table.clear()
 
         print("StateExt.RefreshDashboard(): clearing table...")
+        op.LOG.Log("StateExt.RefreshDashboard(): clearing table...")
         table.appendRow(["Feature", "Value", "Source"])
 
         for key, entry in self._state.items():
             print(f"StateExt.RefreshDashboard(): adding {key}: {entry['value']} " 
                   f"for source component {entry['source']}")
+            op.LOG.Log(f"StateExt.RefreshDashboard(): adding {key}: {entry['value']} " 
+                       f"for source component {entry['source']}")
             table.appendRow([
                 key, 
                 entry["value"], 

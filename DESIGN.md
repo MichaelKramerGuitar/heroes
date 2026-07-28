@@ -8,6 +8,18 @@ The project is intentionally layered.
 
 --- 
 
+## Design Law 1
+
+Information should become progressively more meaningful as it travels through the system.
+
+It should never become less observable.
+
+Every transformation should remain inspectable.
+
+State is not hidden.
+
+State is surfaced.
+
 # Layer 1
 
 ## Signals

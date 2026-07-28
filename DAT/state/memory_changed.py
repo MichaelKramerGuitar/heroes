@@ -71,7 +71,7 @@ def onValueChange(channel: Channel, sampleIndex: int, val: float,
 		prev: The previous sample value
     """
     # print(f"STATE.memory_changed firing...updating {val}")
-    op.LOG.Log(f"STATE.memory_changed firing...updating {val}")
+    # op.LOG.Log(f"STATE.memory_changed firing...updating {val}")
     parent().Publish(
 		"memory",
 		val,

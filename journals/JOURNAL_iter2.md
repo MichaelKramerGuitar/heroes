@@ -607,6 +607,8 @@ memory(t) = memory(t-1) * decay + energy(t)
 
 Like exponentially decaying accumulator in `DSP`. 
 
+> The STATE.lag CHOP is the decay parametery in this specific implemetation
+
 **Note:**
 
 > Python owns meaning. TouchDesigner Owns Signal Processing

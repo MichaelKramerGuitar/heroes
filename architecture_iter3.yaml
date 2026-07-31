@@ -1,0 +1,81 @@
+composition:
+
+    title:
+
+        Momory Zones
+
+portal:
+
+    guitar
+
+    portrait
+
+semantic_features:
+
+    energy:
+      source: AUDIO
+
+    luminosity:
+      source: REACTION
+    
+    memory:
+      source: STATE
+
+idioms:
+
+    breathing
+
+traversals:
+
+    energy
+
+        →
+
+    luminosity
+
+intention:
+
+    Reveal the portrait through sound.
+
+components:
+
+  AUDIO:
+    exports:
+        energy:
+          type: CHOP
+          channels:
+            - energy 
+  
+  PORTRAIT:
+    exports:
+      portrait:
+        type: TOP
+
+  REACTION:
+    imports:
+      energy:
+        from: AUDIO.energy
+    
+    exports:
+      luminosity:
+        type: CHOP
+  
+  RENDER:
+  imports:
+    memory:
+      from: STATE.memory
+
+  intention:
+    Brightness is driven by remembered luminosity rather than instantaneous energy.
+    
+  STATE:
+    imports:
+      luminosity:
+          from: REACTION.luminosity
+
+    exports:
+        memory:
+            type: CHOP
+
+    semantic_features:
+        memory

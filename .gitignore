@@ -19,3 +19,8 @@ __pycache__/
 
 # Logs
 **/**.log
+
+# Media files
+**/*.mov
+**/*.wav
+**/*.mp3

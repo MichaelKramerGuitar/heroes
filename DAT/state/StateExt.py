@@ -54,7 +54,7 @@ class StateExt:
 
 
     def RefreshDashboard(self):
-        table = self.ownerComp.op("state_table")
+        table = op.UI.op("state_table")
 
         table.clear()
 

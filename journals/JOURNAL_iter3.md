@@ -143,3 +143,17 @@ Heroes is beginning to distinguish between space and time.
 `REACTION` connects them.
 
 *This is one of the most profound discoveries in the project so far.*
+
+---
+
+# Base Comps
+
+The Base COMPs aren't just separating code—they're separating roles in the artwork's life cycle:
+
+AUDIO hears.
+ANATOMY knows where things are.
+REACTION interprets relationships.
+STATE remembers.
+RENDER reveals.
+RECORD preserves.
+UI invites performance.

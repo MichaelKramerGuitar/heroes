@@ -59,11 +59,12 @@ traversals:
 
     →
 
-    [head_memory, hands_memory, body_memory, instrument_memory]
+    [head_luminosity, hands_luminosity, body_luminosity, instrument_luminosity]
 
     →
 
-    [head_luminosity, hands_luminosity, body_luminosity, instrument_luminosity]
+    [head_memory, hands_memory, body_memory, instrument_memory]
+
 
 intention:
 

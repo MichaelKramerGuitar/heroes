@@ -15,8 +15,12 @@ def onOffToOn(panelValue: PanelValue):
 	"""
 	Called when a panel value changes from 0 to non-zero.
 	"""
-	# op.LOG.Log(f"[start_recording] OFF TO ON: Panel value changed to {panelValue.val}")
-	# op.RECORD.op("RECORD_visual").par.record = True
+	recording = op.STATE.Toggle(
+		"recording",
+		source="UI"
+	)
+
+	op.RECORD.op("RECORD_visual").par.record = recording
 	
 	return
 
@@ -48,11 +52,11 @@ def onValueChange(panelValue: PanelValue, prev: Any):
 		panelValue: The PanelValue object that changed
 		prev: The previous value of the PanelValue object
 	"""
-	if panelValue.val:
-		op.STATE.Activate("recording", source="UI")
-		op.AUDIO.op("audiodevin1").par.active = True
-		op.LOG.Log(f"[recording]: Panel value changed from {prev} to {panelValue.val}")
-	else:
-		op.STATE.Deactivate("recording")
-		op.AUDIO.op("audiodevin1").par.active = False
-		op.LOG.Log(f"[recording]: Panel value changed from {prev} to {panelValue.val}")
+	# if panelValue.val:
+	# 	op.STATE.Activate("recording", source="UI")
+	# 	op.AUDIO.op("audiodevin1").par.active = True
+	# 	op.LOG.Log(f"[recording]: Panel value changed from {prev} to {panelValue.val}")
+	# else:
+	# 	op.STATE.Deactivate("recording")
+	# 	op.AUDIO.op("audiodevin1").par.active = False
+	# 	op.LOG.Log(f"[recording]: Panel value changed from {prev} to {panelValue.val}")

@@ -88,3 +88,17 @@ class StateExt:
                 entry["value"], 
                 entry["source"]
             ])
+
+    def Toggle(self, feature, source=None):
+        """
+        Toggle is handy for states that have boolean values.
+        """
+
+        if self.Get(feature) is None:
+            self.Activate(feature, source)
+            op.LOG.Log(f"StateExt.Toggle(): Activated feature '{feature}' from source component '{source}'")
+            return True
+
+        self.Deactivate(feature)
+        op.LOG.Log(f"StateExt.Toggle(): Deactivated feature '{feature}'")
+        return False

@@ -1,0 +1,197 @@
+composition:
+
+    title:
+
+        Momory Zones
+
+portal:
+
+    guitar
+
+    portrait
+
+semantic_features:
+
+    energy:
+      source: AUDIO
+    
+    # these are different analyses from audio and are "kind of loose" depending on the actual function, but you get the idea
+    sustain:
+      source: AUDIO
+    
+    attack: 
+      source: AUDIO
+    
+    intensity:
+      source: AUDIO
+
+    head_luminosity:
+      source: REACTION
+    
+    hands_luminosity:
+      source: REACTION
+
+    body_luminosity:
+      source: REACTION
+
+    instrument_luminosity:
+      source: REACTION
+
+    head_memory:
+      source: STATE
+    
+    hands_memory:
+      source: STATE
+
+    body_memory:
+      source: STATE
+
+    instrument_memory:
+      source: STATE
+
+idioms:
+
+    breathing
+
+traversals:
+
+    [energy, attack, intensity, sustain]
+
+    →
+
+    [head_luminosity, hands_luminosity, body_luminosity, instrument_luminosity]
+
+    →
+
+    [head_memory, hands_memory, body_memory, instrument_memory]
+
+
+intention:
+
+    Sections of the portrait have independent memory and are driven by independent features of experience.
+
+components:
+
+  AUDIO:
+    exports:
+        energy:
+          type: CHOP
+          channels:
+            - energy
+        attack:
+          type: CHOP
+          channels:
+            - attack
+        sustain:
+          type: CHOP
+          channels:
+            - sustain
+        intensity:
+          type: CHOP
+          channels:
+            - intensity
+  
+  PORTRAIT:
+    exports:
+      portrait:
+        type: TOP
+
+  REACTION:
+    imports:
+      energy:
+        from: AUDIO.energy
+      attack:
+        from: AUDIO.attack
+      sustain:
+        from: AUDIO.sustain
+      intensity:
+        from: AUDIO.intensity
+    
+    exports:
+      head_luminosity:
+        type: CHOP
+      hands_luminosity:
+        type: CHOP
+      body_luminosity:
+        type: CHOP
+      instrument_luminosity:
+        type: CHOP
+  
+  RENDER:
+    imports:
+      head_region:
+        from: ANATOMY.head
+      hands_region:
+        from: ANATOMY.hands
+      body_region:
+        from: ANATOMY.body
+      instrument_region:
+        from: ANATOMY.instrument
+    
+    exports:
+      rendered_portrait:
+        type: TOP
+
+    intention:
+      Brightness is driven by remembered luminosity rather than instantaneous energy.
+    
+  STATE:
+    imports:
+      head_luminosity:
+          from: REACTION.head_luminosity
+      hands_luminosity:
+          from: REACTION.hands_luminosity
+      body_luminosity:
+          from: REACTION.body_luminosity
+      instrument_luminosity:
+          from: REACTION.instrument_luminosity
+
+    exports:
+        head_memory:
+            type: CHOP
+        hands_memory:
+            type: CHOP
+        body_memory:
+            type: CHOP
+        instrument_memory:
+            type: CHOP
+        state_table:
+            type: DAT
+            purpose: "A table that displays the current state of the system (i.e displays the notion of 'memory' as it changes over time)."
+
+    semantic_features:
+      - head_memory
+      - hands_memory
+      - body_memory
+      - instrument_memory
+  
+  ANATOMY:
+    exports:
+      head_region:
+        type: TOP
+      hands_region:
+        type: TOP
+      body_region:
+        type: TOP
+      instrument_region:
+        type: TOP
+    
+    imports:
+      portrait:
+        from: PORTRAIT.portrait
+
+  UI:
+    exports:
+      start_recording:
+        type: Button
+      stop_recording:
+        type: Button
+      start_listening:
+        type: Button
+      stop_listening:
+        type: Button
+    
+    imports:
+      state_table:
+        from: STATE.state_table
+        purpose: "A table that displays the current state of the system (i.e displays the notion of 'memory' as it changes over time)."

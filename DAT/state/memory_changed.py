@@ -70,12 +70,17 @@ def onValueChange(channel: Channel, sampleIndex: int, val: float,
 		val: The numeric value of the changed sample
 		prev: The previous sample value
     """
-    # print(f"STATE.memory_changed firing...updating {val}")
+    # print(f"STATE.memory_changed firing...updating {channel.name} {val}")
     # op.LOG.Log(f"STATE.memory_changed firing...updating {val}")
-    parent().Publish(
-		"memory",
-		val,
-		source="STATE"
-    )
+    if val:
+        parent().Publish(
+            channel.name,
+            val,
+            source="STATE"
+        )
+        return
+    else:  # val is 0.0 so remove the key from the state
+        parent().Remove(channel.name)
     return
+    
 

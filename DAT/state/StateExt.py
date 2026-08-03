@@ -38,9 +38,9 @@ class StateExt:
             "source": source
         }
         # print(f"StateExt.Set(): {key}: {value} - source component: {source}")
-        op.LOG.Log(f"StateExt.Set(): {key}: {value} - source component: {source}")
+        # op.LOG.Log(f"StateExt.Set(): {key}: {value} - source component: {source}")
         # print("StateExt.Set(): calling RefreshDashboard()")
-        op.LOG.Log("StateExt.Set(): calling RefreshDashboard()")
+        # op.LOG.Log("StateExt.Set(): calling RefreshDashboard()")
         self.RefreshDashboard()
 
     def Get(self, key, default=None):
@@ -48,27 +48,57 @@ class StateExt:
 
     def Remove(self, key):
         # print(f"StateExt.Remove(): attempting to remove key '{key}'")
-        op.LOG.Log(f"StateExt.Remove(): attempting to remove key '{key}'")
+        # op.LOG.Log(f"StateExt.Remove(): attempting to remove key '{key}'")
         self._state.pop(key, None)
+        self.RefreshDashboard()
+
+    def Activate(self, feature, source=None):
+
+        if feature in self._state:
+            return
+
+        self.Publish(feature, True, source)
+        self.RefreshDashboard()
+
+    def Deactivate(self, feature):
+
+        if feature not in self._state:
+            return
+
+        self.Remove(feature)
         self.RefreshDashboard()
 
 
     def RefreshDashboard(self):
-        table = self.ownerComp.op("state_table")
+        table = op.UI.op("state_table")
 
         table.clear()
 
         # print("StateExt.RefreshDashboard(): clearing table...")
-        op.LOG.Log("StateExt.RefreshDashboard(): clearing table...")
+        # op.LOG.Log("StateExt.RefreshDashboard(): clearing table...")
         table.appendRow(["Feature", "Value", "Source"])
 
         for key, entry in self._state.items():
             # print(f"StateExt.RefreshDashboard(): adding {key}: {entry['value']} " 
                   # f"for source component {entry['source']}")
-            op.LOG.Log(f"StateExt.RefreshDashboard(): adding {key}: {entry['value']} " 
-                       f"for source component {entry['source']}")
+            # op.LOG.Log(f"StateExt.RefreshDashboard(): adding {key}: {entry['value']} " 
+                       # f"for source component {entry['source']}")
             table.appendRow([
                 key, 
                 entry["value"], 
                 entry["source"]
             ])
+
+    def Toggle(self, feature, source=None):
+        """
+        Toggle is handy for states that have boolean values.
+        """
+
+        if self.Get(feature) is None:
+            self.Activate(feature, source)
+            op.LOG.Log(f"StateExt.Toggle(): Activated feature '{feature}' from source component '{source}'")
+            return True
+
+        self.Deactivate(feature)
+        op.LOG.Log(f"StateExt.Toggle(): Deactivated feature '{feature}'")
+        return False

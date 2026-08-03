@@ -1,60 +1,22 @@
 # Heroes
 
+> ensure at your TouchDesigner project root you have an Execute DAT synced to [bootstrap.py](./DAT/bootstrap/bootstrap.py) and a Text DAT synced to [config.py](./DAT/config/config.py)
+
 Heroes is a TouchDesigner project exploring computational portraiture.
 
 Live guitar performance becomes the input to a system that reveals, transforms, and converses with portraits through semantic mappings rather than direct parameter mappings.
 
 Current iteration:
 
-> Iteration 1 — First Breath
+> Iteration 3 — Memory Zones
 
 Question:
 
-> How does the portrait appear?
-
-Current pipeline
-
-Guitar
-
-↓
-
-Energy
-
-↓
-
-Luminosity
-
-↓
-
-Portrait Brightness
+> Which Part should awaken first?
 
 ---
 
-## Repository
-
-Heroes.toe
-
-TouchDesigner project.
-
-components/
-
-Reusable TOX components.
-
-python/
-
-Configuration and bootstrap.
-
-SCHEMA.md
-
-Language for reasoning about computational art.
-
-DESIGN.md
-
-Architecture and design philosophy.
-
-JOURNAL.md
-
-Development discoveries.
+see [architecture_iter3.yaml](./architecture_iter3.yaml)
 
 ---
 
@@ -64,4 +26,4 @@ Development discoveries.
 
 2. Connect guitar through Focusrite.
 
-3. Make sure the Audio Device IN CHOP is `active`.
+3. Use `UI` component to control system (i.e. Start and Stop Listening and Recording)

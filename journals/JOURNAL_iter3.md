@@ -157,3 +157,31 @@ STATE remembers.
 RENDER reveals.
 RECORD preserves.
 UI invites performance.
+
+# State
+
+state is conceptually moving toward something like this:
+
+```python
+# continuous value states
+self._continuous = {
+    "head_memory": 0.73,
+    "body_memory": 0.41,
+}
+
+# boolean value states
+self._discrete = {
+    "listening": True,
+    "recording": True,
+}
+```
+
+# Looking towards iter4
+
+**Iteration 4 should ask**
+
+> If different parts of a portrait remember differently...
+
+*what should that feel like?*
+
+an aesthetic question. 
